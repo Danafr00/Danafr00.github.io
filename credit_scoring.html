@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<!--
+	Editorial by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Dana's Portfolio Website</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+
+							<!-- Header -->
+								<header id="header">
+									<a href="index.html" class="logo"><strong>Data Science's Portfolio</strong> </a>
+									<ul class="icons">
+										<li><a href="https://github.com/Danafr00?tab=repositories" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+										<li><a href="https://www.linkedin.com/in/dana-fatadilla-rabba/" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+										<li><a href="https://www.instagram.com/dfatadilla/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+										<li><a href="https://medium.com/@dana.fatadilla123" class="icon brands fa-medium-m"><span class="label">Medium</span></a></li>
+									</ul>
+								</header>
+
+							<!-- Content -->
+								<section>
+									<header class="main">
+										<h1>Credit Risk Scoring</h1>
+									</header>
+
+									<span class="image main"><img src="images/credit_scoring.jpg" alt=""
+										style="object-fit:contain;
+										vertical-align:middle;
+										margin:auto;
+            							width:450px"/></span>
+
+									<p>Nowadays, one can invest in other people's loans using online peer-to-peer lending platforms such as, for example, Lending Club. In the Lending Club, borrowers with higher credit scores (more trustworthy and less risky) earn lower interest rates on their loans. In comparison, borrowers with lower credit scores (less trustworthy and riskier) earn higher rates. From an investor's point of view, loans with higher interest rates are more attractive because they provide a higher rate of return on investment (ROI) but, on the other hand, carry the risk of not being returned at all (default). Therefore, a machine learning model that can predict which high-interest loans are more likely to be repaid. It will provide added value by minimizing the associated risks.</p>
+									<p>For this project, I will be using the libraries for data manipulation (Pandas, Numpy), data visualization (Matplotlib, Seaborn), machine learning (Scikit-learn, XGBoost), and some statistics to get some insight and the trend of the data. The dataset consists of 466285 rows and 75 columns. Using df.info, we know that some columns have missing columns, so we should handle the missing value first. First, we drop the column having many missing values. For the rest missing values, we can just drop the rows to remove them. The rows decrease from 466285 to 372162. Then we move to the number of the columns because 75 columns are quite a much. The columns having uncertain values, such as an address, zip code, and URL, will be dropped.</p>
+									<p>The next step is data exploration. We can explore the data to gain some insights. Here are some investigations that we can do. <br>
+										&emsp; 1. The most jobs title applied for a loan <br>
+										&emsp; 2. The distribution of loan terms, home ownership, and loan purposes <br>
+										The result of exploration and visualization can be used as an initial guess or hypothesis for synthesizing some promotion or offer.</p>
+									<p>Next, we can check the distribution of the columns with the number value. See if the column has an imbalance distribution or even no distribution. It turns out some columns have only one value, so that the columns can be dropped easily. It will not affect the model we will build later. We should also check the outlier. There are many outlier detections that we can use. Just pick one of the methods. In this article, interquartile outlier detection is used. After removing the outliers, the rows decrease again from 372162 to 250872.</p>
+									<p>Feature engineering is the next step we can do. But, this step is optional if you already feel enough with your features. In this article, some new columns are created to help the model understand the correlation between columns. It is just a simple division between columns. It is done because the machine learning model doesn't know the relation between the columns. It just processes the data we give.</p>
+									<p>After that, we move to the ordinal columns. We have to convert the value to make the model understand what we want. The term, grade, sub_grade, and emp_length columns are converted to be some numbers. You can change the value as long as the value is reasonable.</p>
+									<p>The target feature for this dataset is an indicator if the loan is good (0) or bad (1). To identify good loans, I use their loan statuses and print their counts below. The 'Current' and 'Fully Paid' are considered as 0 while 'Charged Off', 'Default': 'Late (16-30 days)', and 'Late (31-120 days)' are considered as 1.  The Lending Club provides the description for each status:<br>
+										&emsp; - Current: The loan is up to date on all outstanding payments. <br>
+										&emsp; - In Grace Period: The loan is past due but within the 15-day grace period. <br>
+										&emsp; - Late (16-30): The loan has not been current for 16 to 30 days. <br>
+										&emsp; - Late (31-120): The loan has not been current for 31 to 120 days. <br>
+										&emsp; - Fully paid: Loan has been fully repaid, either at the expiration of the 3- or 5-year year term or as a result of a prepayment.<br>
+										&emsp; - Default: The loan has not been current for an extended period of time.<br>
+										&emsp; - Charged Off: Loan for which there is no longer a reasonable expectation of further payments.</p>
+									<p>For the imbalanced data problem, we can use SMOTE for handling the majority data while RandomUnderSampler for handling the minority data.
+										Then we build 3 different machine learning models, named decision tree, random forest, and XGBoost. The three models are built to make a scoring through the loan's applicant. Finally, the models are tested, and the performances, such as accuracy, f1 score, and AUC score, are calculated. It shows that XGBoost is the best model among the others. Therefore, the XGBoost model is saved by pickle and can be used in the future.</p>
+									
+									<ul style="text-align: center" class="icons">
+										<li><a href="https://github.com/Danafr00/Credit_Risk_Scoring/blob/main/Credit%20Risk%20Scoring.ipynb" class="icon brands alt fa-github fa-2x"><span class="label">GitHub</span></a></li>
+										<li><a href="https://docs.google.com/presentation/d/122_jRINgpoSSANCS-CG8KWrmLCQ7KGs3/edit?usp=sharing&ouid=106028662316263875714&rtpof=true&sd=true" class="icon brands alt fa-google fa-2x"><span class="label">Google</span></a></li>
+									</ul>
+
+								</section>
+
+						</div>
+					</div>
+
+				<!-- Sidebar -->
+				<div id="sidebar">
+					<div class="inner">
+
+						<!-- Search -->
+							<section id="search" class="alt">
+								<form method="post" action="#">
+									<input type="text" name="query" id="query" placeholder="Search" />
+								</form>
+							</section>
+
+						<!-- Menu -->
+							<nav id="menu">
+								<header class="major">
+									<h2>Menu</h2>
+								</header>
+								<ul>
+									<li><a href="index.html">Homepage</a></li>
+									<li>
+										<span class="opener">Python</span>
+										<ul>
+											<li><a href="data_scrapping.html">Data Scraping</a></li>
+										</ul>
+									</li>
+									<li>
+										<span class="opener">Data Analysis</span>
+										<ul>
+											<li><a href="market_basket.html">Market Basket Analysis</a></li>
+											<li><a href="market_analysis.html">Market Analysis - Business Decision Research</a></li>
+											<li><a href="covid.html">Covid Data Exploration</a></li>
+										</ul>
+									</li>
+									<li>
+										<span class="opener">Data Science</span>
+										<ul>
+											<li><a href="recommendation_system.html">Recommendation System</a></li>
+											<li><a href="telecom_churn.html">Telecom Churn Analysis</a></li>
+											<li><a href="insurance_fraud.html">Insurance Fraud Detection</a></li>
+										</ul>
+									</li>
+									<li>
+										<span class="opener">Dashboard</span>
+										<ul>
+											<li><a href="power_bi.html">Power BI</a></li>
+											<li><a href="gds.html">Google Data Studio</a></li>
+										</ul>
+									</li>
+									<li>
+										<span class="opener">Deep Learning</span>
+										<ul>
+											<li><a href="qa.html">Quality Assurance</a></li>
+										</ul>
+									</li>
+								</ul>
+							</nav>
+
+						<!-- Section -->
+							<section>
+								<header class="major">
+									<h2>Get in touch</h2>
+								</header>
+								<p>Feel free to reach me through these contacts below.</p>
+								<ul class="contact">
+									<li class="icon solid fa-envelope"><a href="#">dana.fatadilla123@gmail.com</a></li>
+									<li class="icon solid fa-phone">(+62) 82135713922</li>
+								</ul>
+							</section>
+
+						<!-- Footer -->
+							<footer id="footer">
+								<p class="copyright">&copy; Untitled. All rights reserved</p>
+							</footer>
+
+					</div>
+				</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
